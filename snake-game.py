@@ -9,14 +9,14 @@ pygame.mixer.init()
 whiteColor = (255, 255, 255)
 redColor = (255, 0, 0)
 blackColor = (0, 0, 0)
-
+ 
 # Variables Used In Game
 screen_width = 900
 screen_height = 600
 clock = pygame.time.Clock()
 font = pygame.font.SysFont(None, 55)
 
-# Functions Used in Game
+# All Functions Used in Game
 def text_screen(text, color, x, y):
     screen_text = font.render(text, True, color)
     game_window.blit(screen_text, [x, y])
@@ -26,7 +26,7 @@ def plot_snake(window, color, list, size):
         pygame.draw.rect(window, color, [x, y, size, size])
        
 def game_loop():
-    game_background_image = pygame.image.load("images/game-background.jpg")
+    game_background_image = pygame.image.load("snake-eater/images/game-background.jpg")
     game_background_image = pygame.transform.scale(game_background_image,(screen_width,screen_height)).convert_alpha()
     is_exit_game = False
     is_game_over = False
@@ -53,7 +53,7 @@ def game_loop():
         
     while not is_exit_game:
         if is_game_over:
-            game_over_background_image = pygame.image.load("images/game-over-background.jpg")
+            game_over_background_image = pygame.image.load("snake-eater/images/game-over-background.jpg")
             game_over_background_image = pygame.transform.scale(game_over_background_image,(screen_width,screen_height)).convert_alpha()
             with open("high-score.txt","w") as f:
                 f.write(str(hight_score))
@@ -109,11 +109,11 @@ def game_loop():
                 del snake_list[0]
             if head in snake_list[:-1]:
                 is_game_over = True
-                pygame.mixer.music.load("music/origins.mp3")
+                pygame.mixer.music.load("snake-eater/music/origins.mp3")
                 pygame.mixer.music.play()               
             if snake_x < 0 or snake_x > screen_width or snake_y < 0 or snake_y > screen_height:               
                 is_game_over = True
-                pygame.mixer.music.load("music/origins.mp3")
+                pygame.mixer.music.load("snake-eater/music/origins.mp3")
                 pygame.mixer.music.play()
             plot_snake(game_window, blackColor, snake_list, snake_size)
 
@@ -124,11 +124,11 @@ def game_loop():
     quit()
 
 def welcome_screen():
-    welcome_background_image = pygame.image.load("images/start-background.jpg")
+    welcome_background_image = pygame.image.load("snake-eater/images/start-background.jpg")
     welcome_background_image = pygame.transform.scale(welcome_background_image,(screen_width,screen_height)).convert_alpha()
     is_exit_game = False
     fps = 30
-    pygame.mixer.music.load("music/rogue.mp3")
+    pygame.mixer.music.load("snake-eater/music/rogue.mp3")
     pygame.mixer.music.play()
     while not is_exit_game:
         game_window.fill(whiteColor)
@@ -140,7 +140,7 @@ def welcome_screen():
                     is_exit_game = True
             if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
-                        pygame.mixer.music.load("music/ac3.mp3")
+                        pygame.mixer.music.load("snake-eater/music/ac3.mp3")
                         pygame.mixer.music.play()
                         game_loop()
         pygame.display.update()
